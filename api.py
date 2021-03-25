@@ -223,6 +223,8 @@ class AudioBook(Resource):
             audioBook.author = args['author']
         if args['narrator']:
             audioBook.narrator = args['narrator']
+        db.session.commit()
+        return audioBook
 
     def delete(self, audiobook_id):
         audioBook = AudioBookModel.query.get(audiobook_id)

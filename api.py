@@ -20,17 +20,17 @@ songsPutArgs = reqparse.RequestParser()
 songsPutArgs.add_argument("name", type=str)
 songsPutArgs.add_argument("duration", type=int)
 
-PodcastPostArgs = reqparse.RequestParser()
-PodcastPostArgs.add_argument("name", type=str, help="Name of the podcast is required", required=True)
-PodcastPostArgs.add_argument("host", type=str, help="Host of the podcast is required", required=True)
-PodcastPostArgs.add_argument("participants", type=str)
-PodcastPostArgs.add_argument("duration", type=int, help="Duration of the podcast is required", required=True)
+podcastPostArgs = reqparse.RequestParser()
+podcastPostArgs.add_argument("name", type=str, help="Name of the podcast is required", required=True)
+odcastPostArgs.add_argument("host", type=str, help="Host of the podcast is required", required=True)
+podcastPostArgs.add_argument("participants", type=str)
+podcastPostArgs.add_argument("duration", type=int, help="Duration of the podcast is required", required=True)
 
-PodcastPutArgs = reqparse.RequestParser()
-PodcastPutArgs.add_argument("name", type=str)
-PodcastPutArgs.add_argument("host", type=str)
-PodcastPutArgs.add_argument("participants", type=str)
-PodcastPutArgs.add_argument("duration", type=int)
+podcastPutArgs = reqparse.RequestParser()
+podcastPutArgs.add_argument("name", type=str)
+podcastPutArgs.add_argument("host", type=str)
+podcastPutArgs.add_argument("participants", type=str)
+podcastPutArgs.add_argument("duration", type=int)
 
 
 audioBookPostArgs = reqparse.RequestParser()
@@ -164,7 +164,7 @@ class Podcast(Resource):
 
     @marshal_with(podcastResourceFields)
     def post(self, podcast_id):
-        args = PodcastPostArgs.parse_args()
+        args = podcastPostArgs.parse_args()
         podcast = PodcastModel(id=podcast_id, name=args['name'], duration=args['duration'], host=args['host'], participants=args['participants'])
         db.session.add(podcast)
         db.session.commit()
